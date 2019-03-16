@@ -1,0 +1,77 @@
+@import "mixins/breakpoints";
+
+$zx-grid-outer-margin: 2rem;
+$zx-grid-gutter-width: 1rem;
+$zx-grid-gutter-width-half: $zx-grid-gutter-width * 0.5;
+$zx-grid-gutter-compensation: $zx-grid-gutter-width-half * -1;
+$zx-grid-column-count: 12;
+
+@mixin zx-grid-cell($size-prefix, $i, $percentage) {
+  .zx-grid-col-#{$size-prefix}-#{$i} {
+    flex-basis: $percentage;
+    padding-left: $zx-grid-gutter-width;
+    padding-right: $zx-grid-gutter-width;
+    max-width: $percentage;
+  }
+
+  .zx-grid-push-#{$size-prefix}-#{$i} {
+    margin-left: $percentage;
+  }
+
+  .zx-grid-row-reverse .zx-grid-push-#{$size-prefix}-#{$i} {
+    margin-left: inherit;
+    margin-right: $percentage;
+  }
+
+}
+
+@mixin zx-grid-cells($size-prefix) {
+  @for $i from 1 through $zx-grid-column-count {
+    $percentage: percentage(1 / $zx-grid-column-count * $i);
+
+    @include zx-grid-cell($size-prefix, $i, $percentage);
+  }
+}
+
+.zx-grid-container,
+.zx-grid-container-fluid {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.zx-grid-container-fluid {
+  padding-right: $zx-grid-outer-margin;
+  padding-left: $zx-grid-outer-margin;
+}
+
+.zx-grid-row {
+  @include zx-display-flex;
+  @include zx-flex(0, 1, auto);
+  @include zx-flex-direction(row);
+  @include zx-flex-wrap(wrap);
+
+  margin-left: -$zx-grid-gutter-width;
+  margin-right: -$zx-grid-gutter-width;
+}
+
+.zx-grid-row-reverse {
+  @extend .zx-grid-row;
+
+  @include zx-flex-direction(row-reverse);
+}
+
+@include zx-breakpoint-xs {
+  @include zx-grid-cells('xs');
+}
+
+@include zx-breakpoint-sm {
+  @include zx-grid-cells('sm');
+}
+
+@include zx-breakpoint-md {
+  @include zx-grid-cells('md');
+}
+
+@include zx-breakpoint-lg {
+  @include zx-grid-cells('lg');
+}

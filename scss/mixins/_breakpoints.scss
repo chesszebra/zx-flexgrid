@@ -1,0 +1,29 @@
+$zx-breakpoint-xs-min: 0em;
+$zx-breakpoint-sm-min: 30em;
+$zx-breakpoint-md-min: 48em;
+$zx-breakpoint-lg-min: 64em;
+
+@mixin zx-breakpoint-xs {
+  @media only screen and (min-width: $zx-breakpoint-xs-min) {
+    @content;
+  }
+}
+
+@mixin zx-breakpoint-sm {
+  @media only screen and (min-width: $zx-breakpoint-sm-min) {
+    @content;
+  }
+}
+
+@mixin zx-breakpoint-md {
+  @media only screen and (min-width: $zx-breakpoint-md-min) {
+    @content;
+  }
+}
+
+@mixin zx-breakpoint-lg {
+  @media only screen and (min-width: $zx-breakpoint-lg-min) {
+    @content;
+  }
+}
+
